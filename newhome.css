@@ -1,0 +1,608 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat',sans-serif;
+}
+html{
+    font-size: 16px;
+  
+}
+body{
+    font-family: 'Montserrat',sans-serif;
+    color: #fff;
+}
+.container{
+    width: 500px;
+    margin: 20px auto;
+    overflow-x: hidden;
+    user-select: none;
+    position: relative;
+    transition: .5s;
+}
+.header{
+    background-color: #f01b1b;
+    text-align: center;
+    padding: 1.75rem;
+}
+.header h1{
+    font-size: 2.25rem;
+}
+.date{
+    background-color: black;
+    text-align: right;
+    font-size: 0.75rem;
+    padding: 0rem 2rem 0rem 0;
+    display: flex;
+}
+
+.sidenav {
+height: calc(40px + 600px);
+width: 0;
+text-align: left;
+position: absolute;
+z-index: 1;
+background-color: black;
+overflow-x: hidden;
+transition: 0.5s;
+opacity: 0.93;
+}
+
+.sidenav a {
+padding: 20px 8px 8px 50px;
+text-decoration: none;
+font-size: 20px;
+top: 0;
+color: #c5b4b4;
+display: block;
+transition: 0.3s;
+}
+
+.sidenav a:hover {
+color: #f1f1f1;
+}
+.sidenav a i{
+    padding-right: 10px;
+}
+
+.sidenav .closebtn {
+position: absolute;
+top: -20px;
+right: 10px;
+font-size: 26px;
+margin-left: 8px;
+
+}
+#main {
+transition: left .5s;
+padding-left: 10px;
+background-color: black;
+}
+  
+.date ol ,button{
+    display: flex;
+    list-style-type: none;
+    padding-left: 230px;
+    font-size: 19px;
+    padding-top: 10px;
+    background-color: black;
+}
+.date ol li, button{
+    padding: 0 0 0 6px;
+    background: none;
+    border: none;
+    color: white;
+    background-color: black;
+}
+#nav{
+    width: 100%;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    height: 600px;
+    background-color: black; 
+}
+ .slider{
+    width: 100%;
+    height: 600px;
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    
+}
+.img{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    height: calc(100vh - 40px - 100px + 40px + 58px);
+    animation: slide 60s infinite;
+    position: absolute;
+    opacity: 0;
+}
+@keyframes slide{
+    10%{opacity: 1;}
+    40%{opacity: 0;}
+
+}
+img:nth-child(0){animation-delay: 10s;}
+img:nth-last-child(1){animation-delay: 30s;}
+
+
+section{
+   color: white;
+   position: absolute;
+   left: 10px;
+   top: 14rem;
+   max-width: 700px;
+   
+}
+section p {
+   font-size: 1.5rem;
+   text-align: left;
+   font-weight: bold;
+   color: rgb(255, 255, 255);
+   
+}
+section p label{
+   font-size: 2.3rem;
+   background-color: none;
+   text-align: left;
+   color: rgb(255, 255, 255);
+   font-weight: bold;
+}
+section #al #li{
+float: left;
+padding: 20px;
+justify-content: space-between;
+
+}
+section #al #li a{
+   text-decoration: none;
+   color: white;
+   border-radius: 0.5em;
+   padding: 13px;
+   font-size: 1.2em;
+   background-color: rgb(9, 182, 9);
+   transition: all 0.8s;
+   left: 35%;
+}
+
+section #al #li a:hover{
+    background-color: black;
+
+}
+ol li a{
+  text-decoration: none;
+  font-size: 3rem;
+}
+ul.currencies{
+    height: 600px;
+    background-color: #222;
+    padding: 0 1rem 0 1rem;
+    overflow-y: auto;
+}
+ ul.currencies li{
+    background-color: #900b0b;
+    border-radius: 5px;
+    list-style: none;
+    padding: 1rem 1rem 0.7rem 1rem;
+    margin-bottom: 1rem;
+    position: relative;
+ }
+ ul.currencies li:last-child{
+     margin-bottom: none;
+ }
+ ul.currencies li.base-currency{
+     background-color: #4e91d4;
+ }
+ .flag{
+     width: 90px;
+     height: 90px;
+     border: 1px solid #fff;
+     vertical-align: top;
+ }
+ .info{
+     display: inline-block;
+     width: 75%;
+ }
+ .info .input span {
+    font-size: 1.4rem;
+    font-weight: bold;
+    display: inline-block;
+    width: 4rem;
+    text-align: center;
+ }
+
+ .info .input input {
+    font-size: 1.4rem;
+    width: 78%;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    color: black;
+    padding: 0.3rem;
+    margin-bottom: 0.4rem;
+    font-weight: bold;
+  }
+  .info .currency-name{
+      font-size: 1rem;
+      font-weight: bold;
+      margin-bottom: 0.4rem;
+      margin-left: 4rem;
+  }
+  .info .base-currency-rate{
+      font-size: 0.9rem;
+      margin-left: 4rem;
+  }
+  
+  ul.currencies li .close{
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 0 0.5rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #666;
+  }
+  ul.currencies li .close:hover{
+      color: #fff;
+  }
+  /* Scrollbar */
+ul.currencies::-webkit-scrollbar {
+    width: 5px;
+  }
+  ul.currencies::-webkit-scrollbar-thumb {
+    background-color: #2d2d37;
+    border-bottom: 1rem solid #222;
+  }
+  ul.add-currency-list{
+      position: absolute;
+      bottom: 56px;
+      left: 105%;
+      background-color: #f1f1f1;
+      color: #333;
+      width: 100%;
+      height: calc(600px + 0.5rem);
+      overflow-y: auto;
+      transition: all 0.25s;
+      
+  }
+  ul.add-currency-list li {
+    list-style: none;
+    padding: 0.75rem;
+    border-bottom: 1px solid #ddd;
+  }
+  ul.add-currency-list li.disabled{
+      opacity: 0.7;
+      cursor: not-allowed;
+  }
+
+  ul.add-currency-list li .flag {
+    width: 3rem;
+    height: 2rem;
+    vertical-align: middle;  
+  }
+  ul.add-currency-list li span {
+    margin-left: 1rem;
+    font-weight: bold;
+    
+  }
+.add-currency-btn {
+    background-color: #f01b1b;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-top: 3px solid #222;
+    outline: none;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.25s;
+    position: relative;
+    padding: 19px;
+    padding-left: 13rem;   
+  }
+  .add-currency-btn i{
+      position: absolute;
+      top: 0.6rem;
+      left: 30%;
+      opacity: 0;
+      text-align: center;
+  }
+
+  .add-currency-btn.open{
+      background-color: #d9534f;
+  }
+  .add-currency-btn.open i{
+      opacity: 1;
+      left: 1.25rem;
+  }
+  .add-currency-btn.open + ul.add-currency-list{
+      left: 0;
+  }
+  .add-currency-btn.open + ul.add-currency-list li:hover{
+      background-color: #ddd;
+  }
+
+  @media (max-width: 600px) {
+    html { font-size: 14px; }
+    .container { width: 100%; margin: 0 auto; }
+    ul.currencies { height: calc(100vh - 83px - 34px - 51px); }
+    .header h1 { font-size: 2rem; }
+    .flag { width: 3rem; height: 2rem; }
+    .info .input span { font-size: 1.25rem; width: 3.5rem; }
+    .info .input input { font-size: 1.25rem; width: 76%;}
+    .info .currency-name { margin-left: 3.5rem; }
+    .info .base-currency-rate { margin-left: 3.5rem; }
+    ul.add-currency-list { bottom: 48px; height: calc(100vh - 80px - 51px); }
+    .add-currency-btn i { left: 25%; top:0.65rem; }
+  }
+
+  @media (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+  .last{
+    background-color: red;
+    color: white;
+    clear: both;
+    text-align: center;
+    padding: 16px;
+    font-size: 17px;
+    margin: 0;
+    
+}
+.last i{
+  font-size: 1.5rem;
+}
+
+                    /*FOR SIGN UP*/
+/* Full-width input fields */
+input[type=text], input[type=password] {
+    width: 60%;
+    border-radius: 2rem;
+    padding: 12px 20px;
+    margin: 1rem;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 1.1rem;
+  }
+  
+  /* Add a background color when the inputs get focus */
+  input[type=text]:focus, input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+  form p{
+    font-size: 1.1rem;
+    margin: 2rem;
+    text-align: left;
+  }
+
+  select{
+    margin: 1rem;
+    padding: 0.9rem;
+    font-size: 1.1rem;
+  }
+  option{
+    font-size: 1.1rem;padding: 0.3rem;
+  }
+  .content{
+    background-color: rgba(51, 55, 51, 0.961);
+    width: 90%;
+  }
+  .profile_info{
+    padding: 1rem;
+    display: flex;
+  }
+  .profile_info img{
+    width: 5rem;
+    height: 6rem;
+  }
+  .mini{
+    padding: 0.8rem;
+    color: white;
+  }
+  strong{
+    font-size: 1.1rem;
+    padding: 0.4rem;
+  }
+  strong i{
+    color: #ccc;
+    padding-bottom: 1rem;
+  }
+  small{
+    padding: 0.4rem;
+  }
+  small article{
+    padding-top: 1.3rem;
+  }
+  small a{
+    font-size: 1.3rem;
+   
+  }
+
+   .signupbtn {
+    margin: 1rem;
+    text-align: center;
+    
+  }
+    .loginbtn button, .signupbtn button, .createbtn button{
+      margin-left: 4rem;
+      background-color: red;
+      border-radius: 2rem;
+      padding: 12px 4.3rem;
+      width: 70%;
+      font-size: 1.5rem;
+      text-align: center;
+
+    }
+
+  /* The Modal (background) */
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    width: 500px;
+    margin: 0 auto; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: #000;
+    padding-top: 3rem;
+    overflow-x: hidden;
+    user-select: none;
+    margin-bottom: 3rem;
+    opacity: 1;
+    text-align: left;   
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    margin: 20px auto; /* 5% from the top, 15% from the bottom and centered */
+    width: 500px; /* Could be more or less, depending on screen size */
+  }
+  
+  /* Style the horizontal ruler */
+  hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 20px;
+    
+  }
+
+   
+  /* The Close Button (x) */
+  .close {
+    position: absolute;
+    right: 15px;
+    top: 20px;
+    font-size: 35px;
+    font-weight: bold;
+    color: #f1f1f1;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #f44336;
+    cursor: pointer;
+    font-size: 3.2rem;
+  }
+
+  .imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+  }
+  
+  img.avatar {
+    width: 40%;
+    border-radius: 50%;
+  }
+  
+  /* Clear floats */
+  .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  input[type = "radio"]{
+      margin: 0.6rem;
+  }
+  label{
+      font-size: 1.1rem;
+      margin-left: 1rem;
+    
+  }
+  h1{
+      text-align: center;
+      font-size: 2rem;
+      padding-bottom: 1rem;
+  }
+  p{
+      font-size: 1rem;
+      text-align: center;
+
+  }
+  
+  /* Change styles for cancel button and signup button on extra small screens */
+  @media screen and (max-width: 300px) {
+     .signupbtn,.loginbtn {
+       width: 100%;
+    }
+  }
+
+  
+
+  /* Add Zoom Animation */
+  .animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+  }
+  
+  @-webkit-keyframes animatezoom {
+    from {-webkit-transform: scale(0)} 
+    to {-webkit-transform: scale(1)}
+  }
+    
+  @keyframes animatezoom {
+    from {transform: scale(0)} 
+    to {transform: scale(1)}
+  }
+  
+  /* Change styles for span and cancel button on extra small screens */
+  @media screen and (max-width: 300px) {
+    span.psw {
+       display: block;
+       float: none;
+    }
+  }
+  .contactus,.news, .success{
+    background-color: black;
+    padding: 1rem 0rem 1rem 1rem;
+  }
+  
+  .contactus hr,.news hr{width: 80%;}
+  .contactus h2,.news h2{
+    text-align: left;
+    font-size: 2rem;
+    padding: 0.6rem;
+  }
+  .contactus li{
+    padding: 0.5rem;
+    list-style-type: none;
+  }
+  i{
+    padding-right: 1rem;
+    font-size: 1.3rem;
+    cursor: pointer;
+  }
+  .contact a{
+    color: white;
+    text-decoration: none;
+  }
+  .news img{
+    width: 7rem;
+    height: 6rem;
+  }
+  .news p{
+    text-align: left;
+    padding: 1rem;
+  }
+  .success p{
+    text-align: left;
+    font-size: 1.2rem;
+    max-width: 25rem;
+  }
+  textarea{
+    font-size: 1rem;
+    padding: 0.2rem;
+  }
+ .success button{
+   width: 7rem;
+   padding: 1rem;
+   background-color: lime;
+   color: white;
+   border-radius: 0.5rem;
+   font-weight: bold;
+   margin: 0.5rem 0 0 10rem;
+ }
+  
+  

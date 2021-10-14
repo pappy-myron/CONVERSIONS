@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Convertor</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="newhome.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+          <h1>Temperature Converter</h1>
+        </div>
+        <div class="date">
+            <div id="mySidenav" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <a href="Index.php"><i class="fas fa-home"></i>Home</a>
+                <a href="news.html">News</a>
+                <a href="contact.html">Contacts</a>
+                <a href="currency.html">Currency</a>
+                <a href="length.html">Length</a>
+                <a href="weight.html">Weight</a>
+                <a href="speed.html">Speed</a>
+                <a href="temperature.html">Temperature</a>
+                <a href="time.html">Time</a>
+            </div>
+            <div id="main">
+                <span style="font-size:30px;cursor:pointer;" onclick="openNav()">&#9776;</span>
+            </div>
+            
+        </div>
+        <ul class="currencies"></ul>
+        <button class="add-currency-btn"><i class="fas fa-long-arrow-alt-left"></i><p>Add Temperature</p></button>
+        <ul class="add-currency-list"></ul>
+      </div>
+    
+      <script type="text/javascript">
+
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        }
+
+                            //Variables
+            const addCurrencyBtn = document.querySelector(".add-currency-btn");
+            const addCurrencyList = document.querySelector(".add-currency-list");
+            const currenciesList = document.querySelector(".currencies");
+
+            const initiallyDisplayedCurrencies = ["Cel", "Kel"];
+            let baseCurrency;
+            let baseCurrencyAmount;
+
+            let currencies = [
+                {
+                name: "Celsius",
+                abbreviation: "Cel",
+                symbol: "℃",
+                flagURL: "images/Celcius.png",
+                rate: 1
+                },
+                {
+                name: "Kelvin",
+                abbreviation: "Kel",
+                symbol: "K",
+                flagURL: "images/kelvin.png",
+                rate: + 273.15
+                },
+                {
+                name: "Fahrenheit",
+                abbreviation: "Fahr",
+                symbol: "℉",
+                flagURL: "images/fah.png",
+                rate: 1.8 + (32)
+                }
+            ];
+
+
+            addCurrencyBtn.addEventListener("click", addCurrencyBtnClick);
+
+            //Slider for button toggle
+            function addCurrencyBtnClick(event) {
+                addCurrencyBtn.classList.toggle("open");
+                
+            }
+
+            addCurrencyList.addEventListener("click", addCurrencyListClick);
+
+            function addCurrencyListClick(event) {
+            const clickedListItem = event.target.closest("li");
+            if(!clickedListItem.classList.contains("disabled")) {
+                const newCurrency = currencies.find(c => c.abbreviation===clickedListItem.getAttribute("data-currency"));
+                if(newCurrency) newCurrenciesListItem(newCurrency);
+            }
+            }
+
+            currenciesList.addEventListener("click", currenciesListClick);
+
+            function currenciesListClick(event) {
+            if(event.target.classList.contains("close")) {
+                const parentNode = event.target.parentNode;
+                parentNode.remove();
+                addCurrencyList.querySelector(`[data-currency=${parentNode.id}]`).classList.remove("disabled");
+                if(parentNode.classList.contains("base-currency")) {
+                const newBaseCurrencyLI = currenciesList.querySelector(".currency");
+                if(newBaseCurrencyLI) {
+                    setNewBaseCurrency(newBaseCurrencyLI);
+                    baseCurrencyAmount = Number(newBaseCurrencyLI.querySelector(".input input").value);
+                }
+                }
+            }
+            }
+
+            function setNewBaseCurrency(newBaseCurrencyLI) {
+            newBaseCurrencyLI.classList.add("base-currency");
+            baseCurrency = newBaseCurrencyLI.id;
+            const baseCurrencyRate = currencies.find(currency => currency.abbreviation===baseCurrency).rate;
+            currenciesList.querySelectorAll(".currency").forEach(currencyLI => {
+                const currencyRate = currencies.find(currency => currency.abbreviation===currencyLI.id).rate;
+                const exchangeRate = currencyLI.id===baseCurrency ? 1 : (currencyRate/baseCurrencyRate).toFixed(4);
+                currencyLI.querySelector(".base-currency-rate").textContent = `1 ${baseCurrency} = ${exchangeRate} ${currencyLI.id}`;
+            });
+            }
+
+            currenciesList.addEventListener("input", currenciesListInputChange);
+
+            function currenciesListInputChange(event) {
+            const isNewBaseCurrency = event.target.closest("li").id!==baseCurrency;
+            if(isNewBaseCurrency) {
+                currenciesList.querySelector(`#${baseCurrency}`).classList.remove("base-currency");
+                setNewBaseCurrency(event.target.closest("li"));
+            }
+            const newBaseCurrencyAmount = isNaN(event.target.value) ? 0 : Number(event.target.value);
+            if(baseCurrencyAmount!==newBaseCurrencyAmount || isNewBaseCurrency) {
+                baseCurrencyAmount = newBaseCurrencyAmount;
+                const baseCurrencyRate = currencies.find(currency => currency.abbreviation===baseCurrency).rate;
+                currenciesList.querySelectorAll(".currency").forEach(currencyLI => {
+                if(currencyLI.id!==baseCurrency) {
+                    const currencyRate = currencies.find(currency => currency.abbreviation===currencyLI.id).rate;
+                    const exchangeRate = currencyLI.id===baseCurrency ? 1 : (currencyRate/baseCurrencyRate).toFixed(4);
+                    currencyLI.querySelector(".input input").value = exchangeRate*baseCurrencyAmount!==0 ? (exchangeRate*baseCurrencyAmount).toFixed(4) : "";
+                }
+                });
+            }
+            }
+
+            currenciesList.addEventListener("focusout", currenciesListFocusOut);
+
+            function currenciesListFocusOut(event) {
+            const inputValue = event.target.value;
+            if(isNaN(inputValue) || Number(inputValue)===0) event.target.value="";
+            else event.target.value = Number(inputValue).toFixed(4);
+            }
+
+            currenciesList.addEventListener("keydown", currenciesListKeyDown);
+
+            function currenciesListKeyDown(event) {
+            if(event.key==="Enter") event.target.blur();
+            }
+
+
+            function populateAddCurrencyList() {
+                for(let i=0; i<currencies.length; i++) {
+                addCurrencyList.insertAdjacentHTML(
+                    "beforeend", 
+                    `<li data-currency=${currencies[i].abbreviation}>
+                    <img src=${currencies[i].flagURL} class="flag"><span>${currencies[i].abbreviation} - ${currencies[i].name}</span>
+                    </li>`
+                );
+                }
+            }
+
+            function populateCurrenciesList() {
+                for(let i=0; i<initiallyDisplayedCurrencies.length; i++) {
+                const currency = currencies.find(c => c.abbreviation===initiallyDisplayedCurrencies[i]);
+                if(currency) newCurrenciesListItem(currency);
+                }
+            }
+
+            function newCurrenciesListItem(currency) {
+                if(currenciesList.childElementCount===0) {
+                baseCurrency = currency.abbreviation;
+                baseCurrencyAmount = 0;
+                }
+                addCurrencyList.querySelector(`[data-currency=${currency.abbreviation}]`).classList.add("disabled");
+                const baseCurrencyRate = currencies.find(c => c.abbreviation===baseCurrency).rate;
+                const exchangeRate = currency.abbreviation===baseCurrency ? 1 : (currency.rate/baseCurrencyRate).toFixed(4);
+                const inputValue = baseCurrencyAmount ? (baseCurrencyAmount*exchangeRate).toFixed(4) : "";
+            
+                currenciesList.insertAdjacentHTML(
+                "beforeend",
+                `<li class="currency ${currency.abbreviation===baseCurrency ? "base-currency" : ""}" id=${currency.abbreviation}>
+                    <img src=${currency.flagURL} class="flag">
+                    <div class="info">
+                    <p class="input"><span class="currency-symbol">${currency.symbol}</span><input placeholder="0.0000" value=${inputValue}></p>
+                    <p class="currency-name">${currency.abbreviation} - ${currency.name}</p>
+                    <p class="base-currency-rate">1 ${baseCurrency} = ${exchangeRate} ${currency.abbreviation}</p>
+                    </div>
+                    <span class="close">&times;</span>
+                </li>`
+                );
+            }
+
+
+            populateAddCurrencyList();
+            populateCurrenciesList();
+
+
+
+            
+
+
+
+        </script> 
+</body>
+</html>
